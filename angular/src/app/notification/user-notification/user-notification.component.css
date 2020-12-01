@@ -1,0 +1,15 @@
+.custom-note{
+    width: auto;
+    max-width: 400px;
+    overflow-wrap: anywhere;
+    margin-bottom: 6px;
+    padding: 20px;
+    margin: 9px;
+    color: white;
+    background-color: rgb(0 165 186);
+    box-shadow: 0 2px 10px rgba(0, 0, 0,0.2);
+}
+.sp{
+cursor: pointer;
+margin-left: 20px;
+}

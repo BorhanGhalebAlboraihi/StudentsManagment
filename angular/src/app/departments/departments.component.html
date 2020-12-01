@@ -1,0 +1,106 @@
+<div dir="rtl" class="row clearfix" [@routerTransition]>
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="card main-content">
+      <div class="header text-right">
+        <h2>{{ "الاقسام" | localize }}</h2>
+        <ul class="header-dropdown">
+          <li>
+            <button
+              mat-icon-button
+              [matMenuTriggerFor]="headerMenu"
+              class="header-dropdown-mat-icon-button"
+            >
+              <mat-icon><i class="fa fa-arrow-circle-down"></i></mat-icon>
+            </button>
+            <mat-menu #headerMenu="matMenu">
+              <button mat-menu-item (click)="refresh()">
+                <mat-icon><i class="fa fa-refresh"></i></mat-icon>
+                <span>{{ "تحديث" | localize }}</span>
+              </button>
+            </mat-menu>
+          </li>
+        </ul>
+      </div>
+      <div class="body table-responsive">
+         <!--query start-->
+         <div class="row clearfix">
+             <form>
+                 <div class="row">
+                     <div class="col-md-6">
+                         <mat-form-field>
+                             <input matInput [placeholder]="l('فلتر')" [(ngModel)]="keyword" name="keyword">
+                         </mat-form-field>
+                     </div>
+
+                     <div class="col-md-12 text-right p-r-25">
+                         <button mat-raised-button color="primary" (click)="getDataPage(1)">{{ 'بحث' | localize }}</button>
+                     </div>
+                 </div>
+             </form>
+          </div>
+          <!--query end-->
+        <table class="table table-hover table-striped" [busy]="isTableLoading">
+          <thead>
+            <tr>
+              <th>{{ "الاسم" | localize }}</th>
+              <th>{{ "الوصف" | localize }}</th>
+              <th>{{ "الكلية" | localize }}</th>
+              <th>{{ "العمليات" | localize }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="
+                let dept of (depts
+                  | paginate
+                    : {
+                        id: 'server',
+                        itemsPerPage: pageSize,
+                        currentPage: pageNumber,
+                        totalItems: totalItems
+                      })
+              "
+            >
+              <td>{{ dept.departmentName }}</td>
+              <td>{{ dept.departmentDescription }}</td>
+              <td>{{ dept.collage }}</td>
+              <td>
+                <button class="action-button" mat-icon-button [matMenuTriggerFor]="actionsMenu">
+                  <mat-icon><i class="fa fa-arrow-circle-down"></i></mat-icon>
+                </button>
+                <mat-menu #actionsMenu="matMenu">
+                  <button mat-menu-item (click)="editDept(dept)">
+                    <mat-icon><i class="fa fa-edit"></i></mat-icon>
+                    <span>{{ "تعديل" | localize }}</span>
+                  </button>
+                  <button mat-menu-item (click)="delete(dept)">
+                    <mat-icon><i class="fa fa-remove"></i></mat-icon>
+                    <span>{{ "حذف" | localize }}</span>
+                  </button>
+                </mat-menu>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div
+          class="abp-pagination-controls-wrapper"
+          *ngIf="totalItems > pageSize"
+        >
+          <abp-pagination-controls
+            (pageChange)="getDataPage($event)"
+            id="server"
+          >
+          </abp-pagination-controls>
+        </div>
+        <button
+          mat-mini-fab
+          color="primary"
+          class="pull-right"
+          (click)="createDept()"
+        >
+          <mat-icon><i class="fa fa-plus"></i></mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

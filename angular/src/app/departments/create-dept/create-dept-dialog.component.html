@@ -1,0 +1,56 @@
+<form dir="rtl" autocomplete="off" #createUserModal="ngForm" (ngSubmit)="save()">
+  <h1 mat-dialog-title>{{ "انشاء القسم" | localize }}</h1>
+  <mat-dialog-content style="width:fit-content;height:250px;">
+    <div class="row">
+      <div class="col-md-12">
+        <mat-form-field>
+          <input
+            matInput
+            name="UserName"
+            [placeholder]="'اسم القسم' | localize"
+            [(ngModel)]="dept.departmentName"
+            required
+            minlength="2"
+            maxlength="32"
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            matInput
+            name="desc"
+            [placeholder]="'الوصف' | localize"
+            [(ngModel)]="dept.departmentDescription"
+            required
+            maxlength="32"
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            matInput
+            name="Name"
+            [placeholder]="'الكلية' | localize"
+            [(ngModel)]="dept.collage"
+            required
+            disabled
+            maxlength="32"
+          />
+        </mat-form-field>
+
+      </div>
+    </div>
+  </mat-dialog-content>
+  <div mat-dialog-actions align="end">
+    <button mat-button type="button" [disabled]="saving" (click)="close(false)">
+      {{ "Cancel" | localize }}
+    </button>
+    <button
+      mat-flat-button
+      type="submit"
+      flex="15"
+      color="primary"
+      [disabled]="!createUserModal.form.valid || saving"
+    >
+      {{ "Save" | localize }}
+    </button>
+  </div>
+</form>

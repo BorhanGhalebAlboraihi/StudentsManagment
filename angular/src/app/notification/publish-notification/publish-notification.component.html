@@ -1,0 +1,35 @@
+
+
+<form [busy]="saving" #templateVariableName="ngForm" (ngSubmit)="publish()">
+  <h1 mat-dialog-title>{{ "Publish Notification" | localize }}</h1>
+  <mat-dialog-content style="width: 400px;">
+    <mat-form-field *ngIf="tenantId != null">
+      <mat-label>{{'Users'}}</mat-label>
+<mat-select name="UId" [(ngModel)]="selectedUserId" multiple required>
+  <mat-option *ngFor="let user of users" [value]="user.id" name="id">
+    {{ user.fullName }}
+  </mat-option>
+</mat-select>
+  </mat-form-field>
+<mat-form-field>
+    <mat-label>{{'Message'}}</mat-label>
+  <textarea
+    name="txt"
+    matInput
+    matTextareaAutosize
+    required
+    [(ngModel)]="message"
+    placeholder="Enter Your Message..."
+  ></textarea>
+</mat-form-field>
+  </mat-dialog-content>
+  <div mat-dialog-actions align="end">
+    <button mat-button type="button" [disabled]="saving" (click)="close()">
+      {{ "Cancel" | localize }}
+    </button>
+    <button [disabled]="templateVariableName.form.invalid" color type="submit" mat-mini-fab color="primary" class="pull-left">
+      <mat-icon>send</mat-icon>
+    </button>
+  </div>
+
+</form>

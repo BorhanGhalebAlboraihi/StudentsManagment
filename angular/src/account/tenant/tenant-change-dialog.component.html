@@ -1,0 +1,34 @@
+﻿<form dir="rtl" autocomplete="off"
+      #changeTenantForm="ngForm"
+      (ngSubmit)="save()">
+    <h1  mat-dialog-title >{{ "تغيير الكلية" | localize }}</h1>
+    <mat-dialog-content>
+       <!--  <mat-form-field>
+            <input
+                matInput
+                name="tenancyName"
+                [placeholder]="'TenancyName' | localize"
+                [(ngModel)]="tenancyName"
+                maxlength="64"/>
+        </mat-form-field> -->
+        <mat-form-field>
+            <mat-select formControlName="formControlName" placeholder="الكلية">
+                <mat-option [value]="0"></mat-option>
+                <mat-option [value]="1">Default</mat-option>
+            </mat-select>
+          </mat-form-field>
+        <span class="help-block">{{ "LeaveEmptyToSwitchToHost" | localize }}</span>
+    </mat-dialog-content>
+    <div mat-dialog-actions
+         align="end">
+        <button mat-button
+                type="button"
+                [disabled]="saving"
+                (click)="close()">{{ "إلغاء" | localize }}</button>
+        <button mat-flat-button
+                type="submit"
+                flex="15"
+                color="primary"
+                [disabled]="!changeTenantForm.form.valid || saving">{{ "حفظ" | localize }}</button>
+    </div>
+</form>

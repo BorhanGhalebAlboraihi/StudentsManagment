@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "declaration": false,
+    "downlevelIteration": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "lib": [ "es6", "dom" ],
+    "mapRoot": "./",
+    "module": "esnext",
+    /* "types" : ["node"], */
+    "moduleResolution": "node",
+    "outDir": "../dist/out-tsc",
+    "sourceMap": true,
+    "target": "es2015",
+    "typeRoots": [
+      "../node_modules/@types"
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "exceljs": [
+        "../node_modules/exceljs/dist/exceljs.min"
+      ],
+      "@abp/*": [ "../node_modules/abp-ng2-module/dist/src/*" ],
+      "@app/*": [ "./app/*" ],
+      "@shared/*": [ "./shared/*" ],
+      "@node_modules/*": [ "../node_modules/*" ],
+    }
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}

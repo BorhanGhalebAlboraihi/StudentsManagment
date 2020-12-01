@@ -1,0 +1,80 @@
+﻿<form autocomplete="off" dir="rtl" #createUserModal="ngForm">
+  <h1 mat-dialog-title>{{ "بيانات الطالب " | localize }}</h1>
+  <mat-dialog-content>
+    <div class="container">
+      <div class="row">
+        <div class=" col-xs-12">
+          <div class="text-light" style="background: hsl(275deg 45% 46% / 63%);">
+            <table style="width: 100%" class="text-center" border="1">
+
+              <tbody>
+                <tr>
+                  <td>الأسم</td>
+                  <td>{{studentInfo.studentDto?.studentName}}</td>
+                </tr>
+                <tr>
+                  <td>الكلية</td>
+                  <td>{{studentInfo.studentDto?.studentCollage}}</td>
+                </tr>
+                <tr>
+                  <td>القسم</td>
+                  <td>{{studentInfo.studentDto?.departmentName}}</td>
+                </tr>
+                <tr>
+                  <td>الرقم الاكاديمي</td>
+                  <td>{{studentInfo.studentDto?.studentNo}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+      </div>
+      </div>
+      <div class="row">
+
+      <div class=" col-xs-12">
+        <div style="background:hsl(275deg 45% 46% / 63%);" class=" text-light">
+          <p class="text-center label label-success">الكورسات</p>
+          <hr>
+          <table border="1" style="color: white;width: 100%;" class="text-center ">
+              <thead >
+                  <tr>
+                      <th style="color: white;">{{ "المقرر" | localize }}</th>
+                      <th style="color: white;">{{ "الدرجة" | localize }}</th>
+                      <th style="color: white;">{{ "الترم" | localize }}</th>
+                      <th style="color: white;">{{ "المستوى" | localize }}</th>
+                      <th style="color: white;">{{ "العمليات" | localize }}</th>
+                  </tr>
+              </thead>
+              <tbody>
+                      <tr *ngFor="let item of studentInfo.studentCoursesDtos">
+                          <td>{{item.courseDto?.courseName}}</td>
+                          <td>{{item.grade}}</td>
+                          <td>{{item.courseDto?.courseTerm}}</td>
+                          <td>{{item.courseDto?.courseLevel}}</td>
+                          <td> <button mat-menu-item (click)="editGrade(item.courseDto)">
+                            <mat-icon><i class="fa fa-edit"></i></mat-icon>
+                            <span>{{ "تعديل" | localize }}</span>
+                          </button></td>
+
+                  </tr>
+              </tbody>
+          </table>
+        </div>
+      </div>
+      </div>
+    </div>
+  </mat-dialog-content>
+  <div mat-dialog-actions align="end">
+    <button mat-button type="button" [disabled]="saving" (click)="close(false)">
+      {{ "اغلاق" | localize }}
+    </button>
+   <!--  <button
+    mat-mini-fab
+    color="primary"
+    class="pull-left"
+    (click)="excelService.exportAsExcelFile(this.studentInfo.studentCoursesDtos,'الطلاب')"
+  >
+   <i class="fa fa-file-excel-o"></i>
+  </button> -->
+  </div>
+</form>
